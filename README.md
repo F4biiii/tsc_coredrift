@@ -1,10 +1,10 @@
 # tsc_coredrift
 Test the tsc synchronization over different cores
 
-Usage:
+## Usage:
 
-# start writer, writes tsc to shared memory
+### start writer, writes tsc to shared memory
 ./write
 
-# start reader in other terminal, reads tsc and compares with own tsc
+### start reader in other terminal, reads tsc and compares with own tsc
 ./read
