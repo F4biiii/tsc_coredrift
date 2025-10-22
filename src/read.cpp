@@ -55,6 +55,7 @@ int read_tsc(void* arg) {
     size_t cur_diff = 0;          // Save diff of current iteration    
     size_t outliers = 0;          // Save amout of outliers over 1000
     
+    // Constantly read tsc from shared memory and compare with own tsc 
     size_t i = 0;                   // Count number of runs
     while (i < nb_runs && run) {
         // Get own tsc and tsc from shared memory
@@ -75,10 +76,12 @@ int read_tsc(void* arg) {
             continue;
         }
         // Print diff
+        std::cout << "Core " << coreId << " - Diff: " << cur_diff << " runs: " << cur_diff 
+              << " (" << cur_diff * 1000 * 1000 * 1000 / freq << " ns)" << std::endl;
         file << cur_diff * 1000 * 1000 * 1000 / freq << ";";        
         diff_sum += cur_diff;
         i++;
-        std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
     file.close();
     std::cout << std::endl;

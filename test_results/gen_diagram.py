@@ -28,11 +28,11 @@ def create_diagram(values):
     plt.title("TSC drift on different cores")
     plt.legend()
     plt.grid(True)
-    plt.ylim(bottom=0, top=max(100, max(values)))
+    plt.ylim(bottom=0, top=max(200, max(values)))
     plt.savefig("diagram.pdf") 
     plt.close()
 
 if __name__ == "__main__":
-    src_path = "../test_results/output.txt"
+    src_path = "output.txt"
     values = read_values_from_file(src_path)
     create_diagram(values)

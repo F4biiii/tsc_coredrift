@@ -142,80 +142,80 @@ read/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/read.dir/build.make CMakeFiles/read.dir/build
 .PHONY : read/fast
 
-getCpuFrequency.o: getCpuFrequency.cpp.o
-.PHONY : getCpuFrequency.o
+src/getCpuFrequency.o: src/getCpuFrequency.cpp.o
+.PHONY : src/getCpuFrequency.o
 
 # target to build an object file
-getCpuFrequency.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/write.dir/build.make CMakeFiles/write.dir/getCpuFrequency.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/read.dir/build.make CMakeFiles/read.dir/getCpuFrequency.cpp.o
-.PHONY : getCpuFrequency.cpp.o
+src/getCpuFrequency.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/write.dir/build.make CMakeFiles/write.dir/src/getCpuFrequency.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read.dir/build.make CMakeFiles/read.dir/src/getCpuFrequency.cpp.o
+.PHONY : src/getCpuFrequency.cpp.o
 
-getCpuFrequency.i: getCpuFrequency.cpp.i
-.PHONY : getCpuFrequency.i
+src/getCpuFrequency.i: src/getCpuFrequency.cpp.i
+.PHONY : src/getCpuFrequency.i
 
 # target to preprocess a source file
-getCpuFrequency.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/write.dir/build.make CMakeFiles/write.dir/getCpuFrequency.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/read.dir/build.make CMakeFiles/read.dir/getCpuFrequency.cpp.i
-.PHONY : getCpuFrequency.cpp.i
+src/getCpuFrequency.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/write.dir/build.make CMakeFiles/write.dir/src/getCpuFrequency.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read.dir/build.make CMakeFiles/read.dir/src/getCpuFrequency.cpp.i
+.PHONY : src/getCpuFrequency.cpp.i
 
-getCpuFrequency.s: getCpuFrequency.cpp.s
-.PHONY : getCpuFrequency.s
+src/getCpuFrequency.s: src/getCpuFrequency.cpp.s
+.PHONY : src/getCpuFrequency.s
 
 # target to generate assembly for a file
-getCpuFrequency.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/write.dir/build.make CMakeFiles/write.dir/getCpuFrequency.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/read.dir/build.make CMakeFiles/read.dir/getCpuFrequency.cpp.s
-.PHONY : getCpuFrequency.cpp.s
+src/getCpuFrequency.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/write.dir/build.make CMakeFiles/write.dir/src/getCpuFrequency.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read.dir/build.make CMakeFiles/read.dir/src/getCpuFrequency.cpp.s
+.PHONY : src/getCpuFrequency.cpp.s
 
-read.o: read.cpp.o
-.PHONY : read.o
+src/read.o: src/read.cpp.o
+.PHONY : src/read.o
 
 # target to build an object file
-read.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/read.dir/build.make CMakeFiles/read.dir/read.cpp.o
-.PHONY : read.cpp.o
+src/read.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read.dir/build.make CMakeFiles/read.dir/src/read.cpp.o
+.PHONY : src/read.cpp.o
 
-read.i: read.cpp.i
-.PHONY : read.i
+src/read.i: src/read.cpp.i
+.PHONY : src/read.i
 
 # target to preprocess a source file
-read.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/read.dir/build.make CMakeFiles/read.dir/read.cpp.i
-.PHONY : read.cpp.i
+src/read.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read.dir/build.make CMakeFiles/read.dir/src/read.cpp.i
+.PHONY : src/read.cpp.i
 
-read.s: read.cpp.s
-.PHONY : read.s
+src/read.s: src/read.cpp.s
+.PHONY : src/read.s
 
 # target to generate assembly for a file
-read.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/read.dir/build.make CMakeFiles/read.dir/read.cpp.s
-.PHONY : read.cpp.s
+src/read.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/read.dir/build.make CMakeFiles/read.dir/src/read.cpp.s
+.PHONY : src/read.cpp.s
 
-write.o: write.cpp.o
-.PHONY : write.o
+src/write.o: src/write.cpp.o
+.PHONY : src/write.o
 
 # target to build an object file
-write.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/write.dir/build.make CMakeFiles/write.dir/write.cpp.o
-.PHONY : write.cpp.o
+src/write.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/write.dir/build.make CMakeFiles/write.dir/src/write.cpp.o
+.PHONY : src/write.cpp.o
 
-write.i: write.cpp.i
-.PHONY : write.i
+src/write.i: src/write.cpp.i
+.PHONY : src/write.i
 
 # target to preprocess a source file
-write.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/write.dir/build.make CMakeFiles/write.dir/write.cpp.i
-.PHONY : write.cpp.i
+src/write.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/write.dir/build.make CMakeFiles/write.dir/src/write.cpp.i
+.PHONY : src/write.cpp.i
 
-write.s: write.cpp.s
-.PHONY : write.s
+src/write.s: src/write.cpp.s
+.PHONY : src/write.s
 
 # target to generate assembly for a file
-write.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/write.dir/build.make CMakeFiles/write.dir/write.cpp.s
-.PHONY : write.cpp.s
+src/write.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/write.dir/build.make CMakeFiles/write.dir/src/write.cpp.s
+.PHONY : src/write.cpp.s
 
 # Help Target
 help:
@@ -227,15 +227,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... read"
 	@echo "... write"
-	@echo "... getCpuFrequency.o"
-	@echo "... getCpuFrequency.i"
-	@echo "... getCpuFrequency.s"
-	@echo "... read.o"
-	@echo "... read.i"
-	@echo "... read.s"
-	@echo "... write.o"
-	@echo "... write.i"
-	@echo "... write.s"
+	@echo "... src/getCpuFrequency.o"
+	@echo "... src/getCpuFrequency.i"
+	@echo "... src/getCpuFrequency.s"
+	@echo "... src/read.o"
+	@echo "... src/read.i"
+	@echo "... src/read.s"
+	@echo "... src/write.o"
+	@echo "... src/write.i"
+	@echo "... src/write.s"
 .PHONY : help
 
 

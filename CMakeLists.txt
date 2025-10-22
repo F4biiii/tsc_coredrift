@@ -17,13 +17,13 @@ include_directories($ENV{RTE_SDK}/build/include)
 link_directories($ENV{RTE_SDK}/build/lib)
 
 set (WRITE_SOURCES
-    getCpuFrequency.cpp
-    write.cpp
+    src/getCpuFrequency.cpp
+    src/write.cpp
 )
 
 set (READ_SOURCES
-    getCpuFrequency.cpp
-    read.cpp
+    src/getCpuFrequency.cpp
+    src/read.cpp
 )
 
 add_executable(write ${WRITE_SOURCES})
