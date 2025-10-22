@@ -9,13 +9,6 @@ add_definitions(-std=c++17)
 #add_definitions(-Wall -Wextra -Werror -pedantic)
 #add_definitions(-g)
 
-if(NOT DEFINED ENV{RTE_SDK})
-    message(FATAL_ERROR "RTE_SDK environment variable not set")
-endif()
-
-include_directories($ENV{RTE_SDK}/build/include)
-link_directories($ENV{RTE_SDK}/build/lib)
-
 set (WRITE_SOURCES
     src/getCpuFrequency.cpp
     src/write.cpp
@@ -29,16 +22,3 @@ set (READ_SOURCES
 add_executable(write ${WRITE_SOURCES})
 add_executable(read ${READ_SOURCES})
 
-target_link_libraries(write
-    rte_eal
-    rte_mempool
-    rte_mbuf
-    rte_ethdev
-)
-
-target_link_libraries(read
-    rte_eal
-    rte_mempool
-    rte_mbuf
-    rte_ethdev
-)
