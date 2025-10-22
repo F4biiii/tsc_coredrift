@@ -2,15 +2,16 @@
  *  Read tsc from shared memory and test drift
  */
 #include <iostream>
+#include <fstream>
+#include <filesystem>
 #include <rte_ethdev.h>
 #include <rte_cycles.h>
 #include <sys/mman.h>
-#include <sys/stat.h>
 #include <fcntl.h>
-#include <unistd.h>
-#include <cstring>
 #include <csignal>
 #include "getCpuFrequency.h"
+#include <thread>
+#include <chrono>
 
 static constexpr size_t nb_runs = 1000000000000;
 bool run = true;
@@ -40,28 +41,50 @@ int read_tsc(void* arg) {
         perror("mmap");
         return 1;
     }
-    uint64_t read_tsc, now_tsc;     // Save tsc from shared memory and own tsc
-    uint64_t diff = 0;              // Total tsc difference over all measures
+    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+
+    // Output file
+    std::ofstream file;
+    std::string destDir = "../test_results/";
+    std::string file_name = destDir + "output.txt";
+    if(!std::filesystem::exists(destDir)) { std::filesystem::create_directories(destDir); }
+    file.open(file_name);
+
+    size_t read_tsc, now_tsc;     // Save tsc from shared memory and own tsc
+    size_t diff_sum = 0;          // Sum up tsc difference over all measures
+    size_t cur_diff = 0;          // Save diff of current iteration    
+    size_t outliers = 0;          // Save amout of outliers over 1000
+    
     size_t i = 0;                   // Count number of runs
     while (i < nb_runs && run) {
         // Get own tsc and tsc from shared memory
         now_tsc = rte_get_tsc_cycles();
-        read_tsc = *(reinterpret_cast<uint64_t *>(ptr));
+        rte_smp_rmb();
+        read_tsc = *(volatile size_t*)ptr;
+
         // Subtract higher value from lower
         if (now_tsc > read_tsc) {
-            diff += now_tsc - read_tsc;
-            std::cout << "Core " << coreId << " - Tsc drift: " << now_tsc - read_tsc 
-                      << " (" << (now_tsc - read_tsc) * 1000 * 1000 * 1000 / freq << " ns)" << std::endl;
+            cur_diff = now_tsc - read_tsc;
         } else {
-            diff += read_tsc - now_tsc;
-            std::cout << "Core " << coreId << " - Tsc drift: " << read_tsc - now_tsc
-                      << " (" << (read_tsc - now_tsc) * 1000 * 1000 * 1000 / freq << " ns)" << std::endl;
-        }    
-        i++;
-    }
-    std::cout << "Core " << coreId << " - Avg. tsc difference over " << i << " runs: " << diff / i 
-              << " (" << (diff / i) * 1000 * 1000 * 1000 / freq << " ns)" << std::endl;
+            cur_diff = read_tsc - now_tsc;
+        }   
 
+        // Ignore outliers from hardware
+        if (cur_diff > 1000) {
+            outliers++;
+            continue;
+        }
+        // Print diff
+        file << cur_diff * 1000 * 1000 * 1000 / freq << ";";        
+        diff_sum += cur_diff;
+        i++;
+        std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+    }
+    file.close();
+    std::cout << std::endl;
+    std::cout << "Core " << coreId << " - Avg. tsc difference over " << i << " runs: " << diff_sum / i 
+              << " (" << (diff_sum / i) * 1000 * 1000 * 1000 / freq << " ns)" << std::endl;
+    std::cout << "Core " << coreId << " - Outliers: " << outliers << " ignored values over 1000" << std::endl;
     return 0;
 }
 

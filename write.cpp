@@ -33,10 +33,10 @@ int write_tsc(void* arg) {
         return 1;
     }
     // Repeatedly put tsc in shared memory
-    uint64_t tsc_val = 0;
+    size_t tsc_val = 0;
     while ( 1 ) {
         tsc_val = rte_get_tsc_cycles();
-        memcpy(ptr, &tsc_val, sizeof(uint64_t));
+        memcpy(ptr, &tsc_val, sizeof(size_t));
     }
     return 0;
 }

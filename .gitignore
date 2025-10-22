@@ -1,2 +1,5 @@
 build/*
 !build/Makefile
+
+test_results/*
+!test_results/gen_diagram.py
