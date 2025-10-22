@@ -11,6 +11,9 @@
 #include <cstring>
 
 int write_tsc(void* arg) {
+    int coreId = *(reinterpret_cast<int*>(arg));
+    std::cout << "Core " << coreId << " started" << std::endl;
+    
     const char* name = "/shared_mem";
     const int mem_size = 8;
 
@@ -20,7 +23,6 @@ int write_tsc(void* arg) {
         perror("shm_open");
         return 1;
     }
-    
     // Truncate memory
     ftruncate(shm_fd, mem_size);
     
@@ -30,37 +32,34 @@ int write_tsc(void* arg) {
         perror("mmap");
         return 1;
     }
-    
+    // Repeatedly put tsc in shared memory
     uint64_t tsc_val = 0;
     while ( 1 ) {
         tsc_val = rte_get_tsc_cycles();
         memcpy(ptr, &tsc_val, sizeof(uint64_t));
     }
-
     return 0;
 }
 
 int main(int argc, char** argv) {
     // EAL arguments
-    const char *rte_argv[] = {"write.cpp", "-l", "3-4", "-n", "4", "-a", "04:00.0", "--file-prefix=dpdk1", "--iova-mode=va", nullptr};
+    const char *rte_argv[] = {"write.cpp", "-l", "1-2", "-n", "4", "-a", "04:00.0", "--file-prefix=dpdk1", "--iova-mode=va", nullptr};
     int rte_argc = static_cast<int>(sizeof(rte_argv) / sizeof(rte_argv[0])) - 1;
 
     // Initialize EAL
     if (rte_eal_init(rte_argc, const_cast<char **>(rte_argv)) < 0) {
         rte_exit(EXIT_FAILURE,"Failed to initialize eal: %s\n", rte_strerror(rte_errno));
     }
-
     // Start worker cores
-    int i = 0;
+    int i = 2;
     unsigned lcore_id;
     RTE_LCORE_FOREACH_WORKER(lcore_id) {
-        rte_eal_remote_launch(write_tsc, nullptr, lcore_id);
+        rte_eal_remote_launch(write_tsc, &i, lcore_id);
         i++;
     }
     // Join worker cores
     RTE_LCORE_FOREACH_WORKER(lcore_id) {
         rte_eal_wait_lcore(lcore_id);
     }
-
     return 0;
 }
