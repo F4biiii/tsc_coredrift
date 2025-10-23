@@ -78,7 +78,7 @@ static void read_tsc_fun() {
         file << cur_diff * 1000 * 1000 * 1000 / freq << ";";        
         diff_sum += cur_diff;
         i++;
-        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+        std::this_thread::sleep_for(std::chrono::milliseconds(5000));
     }
     file.close();
     std::cout << std::endl;

@@ -14,11 +14,11 @@ if __name__ == "__main__":
     read = os.path.abspath("build/read")
 
     # Start write process
-    write_proc = subprocess.Popen([write], cwd=os.path.dirname(write))
+    write_proc = subprocess.Popen(["taskset", "-c", "1", write], cwd=os.path.dirname(write))
     time.sleep(3) 
 
     # Start read process, read output text
-    read_proc = subprocess.Popen([read], stdout=subprocess.PIPE, text=True , cwd=os.path.dirname(read))
+    read_proc = subprocess.Popen(["taskset", "-c", "2", read], stdout=subprocess.PIPE, text=True , cwd=os.path.dirname(read))
 
     # Sleep for a while
     time.sleep( (HOURS * 3600) + (MINUTES * 60) + SECONDS ) 
@@ -31,7 +31,7 @@ if __name__ == "__main__":
     write_proc.terminate()
 
     # Generate Diagram
-    subprocess.run(["python3", "gen_diagram.py"], cwd="test_results")
+    subprocess.run(["python3", "gen_diagram.py"])
     print("Test completed!")
 
 

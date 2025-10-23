@@ -29,10 +29,10 @@ def create_diagram(values):
     plt.legend()
     plt.grid(True)
     plt.ylim(bottom=0, top=max(200, max(values)))
-    plt.savefig("diagram.pdf") 
+    plt.savefig("test_results/diagram.pdf") 
     plt.close()
 
 if __name__ == "__main__":
-    src_path = "output.txt"
+    src_path = "test_results/output.txt"
     values = read_values_from_file(src_path)
     create_diagram(values)
