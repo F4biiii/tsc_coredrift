@@ -82,9 +82,13 @@ static void read_tsc_fun() {
     }
     file.close();
     std::cout << std::endl;
-    std::cout << "Avg. tsc difference over " << i << " runs: " << diff_sum / i 
-              << " (" << (diff_sum / i) * 1000 * 1000 * 1000 / freq << " ns)" << std::endl;
-    std::cout << "Outliers: " << outliers << " ignored values over 1000" << std::endl;
+    if (i > 0 && diff_sum > 0) {
+        std::cout << "Avg. tsc difference over " << i << " runs: " << diff_sum / i 
+                << " (" << (diff_sum / i) * 1000 * 1000 * 1000 / freq << " ns)" << std::endl;
+        std::cout << "Outliers: " << outliers << " ignored values over 1000" << std::endl;
+    } else {
+        std::cout << "No measures executed." << std::endl;
+    }
 }
 
 int main(void) {
