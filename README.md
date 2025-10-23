@@ -3,7 +3,7 @@ Test the tsc synchronization over different cores
 
 # Usage (Redhawk 9.6):
 Set time in run_test.py 
-### Sield cores, execute script:
+### Shield cores, execute script:
 sudo shield -a 1-2 <br />
 ./run_test.py <br />
 
