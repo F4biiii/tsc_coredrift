@@ -1,10 +1,3 @@
-/*
- * getCpuFrequency.h
- *
- *  Created on: Sep 19, 2025
- *      Author: root
- */
-
 #ifndef GETCPUFREQUENCY_H_
 #define GETCPUFREQUENCY_H_
 

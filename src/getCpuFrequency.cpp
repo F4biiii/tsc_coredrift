@@ -1,19 +1,3 @@
-/*
- * getCpuFrequency.cpp: Get the number of CPU tick within a second
- *
- * This is a self contained (no dependency to any application include file) function,
- * which measures and returns the frequency of the CPU core it is running on.
- *
- * The macro "TEST_RUNS" defines how many measurements (1 sec. each) are
- * taken to get an average, final value.The first result is thrown away
- * (e.g. cache warming).
- *
- * In case of an error, <(uint64_t) -1> is returned.
- *
- * Created on: Sep 19, 2025
- *     Author: Hartlmueller
- */
-
 #include "getCpuFrequency.h"
 
 

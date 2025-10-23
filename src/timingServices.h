@@ -1,10 +1,3 @@
-/*
- * timingServices.h
- *
- *  Created on: Sep 19, 2025
- *      Author: root
- */
-
 #ifndef TIMINGSERVICES_H_
 #define TIMINGSERVICES_H_
 

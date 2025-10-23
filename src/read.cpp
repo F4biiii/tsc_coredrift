@@ -48,13 +48,13 @@ static void read_tsc_fun() {
     if(!std::filesystem::exists(destDir)) { std::filesystem::create_directories(destDir); }
     file.open(file_name);
 
-    size_t rec_tsc, now_tsc;     // Save tsc from shared memory and own tsc
+    size_t rec_tsc, now_tsc;      // Save tsc from shared memory and own tsc
     size_t diff_sum = 0;          // Sum up tsc difference over all measures
     size_t cur_diff = 0;          // Save diff of current iteration    
     size_t outliers = 0;          // Save amout of outliers over 1000
     
     // Constantly read tsc from shared memory and compare with own tsc 
-    size_t i = 0;                   // Count number of runs
+    size_t i = 0;                   
     while (i < nb_runs && run) {
         // Get own tsc and tsc from shared memory
         now_tsc = read_tsc();
@@ -74,7 +74,7 @@ static void read_tsc_fun() {
         }
         // Print diff
         std::cout << "Diff: " << cur_diff << " runs: " << cur_diff 
-              << " (" << cur_diff * 1000 * 1000 * 1000 / freq << " ns)" << std::endl;
+                  << " (" << cur_diff * 1000 * 1000 * 1000 / freq << " ns)" << std::endl;
         file << cur_diff * 1000 * 1000 * 1000 / freq << ";";        
         diff_sum += cur_diff;
         i++;
