@@ -75,7 +75,8 @@ static void read_tsc_fun() {
         // Print diff
         std::cout << "Diff: " << cur_diff
                   << " (" << cur_diff * 1000 * 1000 * 1000 / freq << " ns)" << std::endl;
-        file << cur_diff * 1000 * 1000 * 1000 / freq << ";";        
+        file << cur_diff * 1000 * 1000 * 1000 / freq << ";";     
+        file.flush();   
         diff_sum += cur_diff;
         i++;
         std::this_thread::sleep_for(std::chrono::milliseconds(5000));

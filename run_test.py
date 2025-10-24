@@ -4,8 +4,8 @@ import subprocess
 import signal
 
 # Test duration
-HOURS = 0
-MINUTES = 1
+HOURS = 1
+MINUTES = 50
 SECONDS = 0
 
 if __name__ == "__main__":
@@ -23,11 +23,8 @@ if __name__ == "__main__":
     # Sleep for a while
     time.sleep( (HOURS * 3600) + (MINUTES * 60) + SECONDS ) 
 
-    # Stop reader
-    read_proc.send_signal(signal.SIGINT)
-    read_proc.wait()
-
-    # Stop writer
+    # Stop reader and writer
+    read_proc.terminate()
     write_proc.terminate()
 
     # Generate Diagram
